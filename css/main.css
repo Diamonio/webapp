@@ -1,0 +1,293 @@
+.body {
+    background-color: var(--tg-theme-bg-color, #fff);
+    color: var(--tg-theme-text-color, #000);
+}
+
+.tour {
+    max-width: 768px;
+}
+
+.tour__select {
+    padding: 5px;
+}
+
+ /*city*/
+
+.choices {
+    max-width: 768px;
+    margin-bottom: 12px;
+}
+
+.choices.is-open {
+    background-color: var(--tg-theme-bg-color, #fff);
+    border-radius: 10px 10px 0 0;
+    z-index: 3;
+}
+
+.is-focused .choices__inner {
+    max-width: 768px;
+    border: 1px solid #CCB26E;
+}
+
+.is-open .choices__inner {
+    max-width: 768px;
+    border: 1px solid #CCB26E;
+    background-color: var(--tg-theme-bg-color, #fff);
+    border-radius: 10px;
+}
+
+.choices.is-open.is-flipped .choices__inner {
+    max-width: 768px;
+    border: 1px solid #CCB26E;
+    border-radius: 10px;
+    z-index: 3;
+}
+
+.choices[data-type*=select-one]:after {
+    height: 8px;
+    width: 8px;
+    top: 40%;
+    z-index: 2;
+    border: 1px solid #666;
+    border-width: 0 0 1px 1px;
+    transform: rotate(-45deg);
+}
+
+.choices[data-type*=select-one].is-open:after {
+    top: 60%;
+    border: 1px solid #CCB26E;
+    background-color: var(--tg-theme-bg-color, #fff);
+    border-width: 0 0 1px 1px;
+    transform: rotate(135deg);
+    z-index: 3;
+}
+
+.choices__inner {
+    position: relative;
+    min-height: 19px;
+    max-width: 768px;
+    padding: 9px 15px 11px 15px;
+    background-color: var(--tg-theme-bg-color, #fff);
+    color: var(--tg-theme-text-color, #000);
+    border: 1px solid #CCB26E;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.choices__list--single {
+    padding: 0;
+}
+
+.is-open .choices__inner {
+    border-radius: 10px;
+}
+
+.choices__placeholder {
+    opacity: 1;
+}
+
+.choices__list--dropdown .choices__placeholder {
+    display: none;
+}
+
+.choices__list--dropdown .choices__item--selectable {
+    padding-right: 15px;
+    background-color: var(--tg-theme-bg-color, #fff);
+}
+
+.choices__list--dropdown .choices__item--selectable:hover {
+    background-color: var(--tg-theme-secondary-bg-color, #fff);
+}
+
+.choices__list--dropdown .choices__item--selectable:active {
+    background-color: var(--tg-theme-secondary-bg-color, #fff);
+}
+
+.choices__list--dropdown .choices__item--selectable:focus {
+    background-color: var(--tg-theme-secondary-bg-color, #fff);
+}
+
+.choices__list--dropdown {
+    top: calc(100% - 30px);
+    padding-top: 30px;
+    background-color: var(--tg-theme-bg-color, #fff);
+}
+
+.choices__list--dropdown.is-active {
+    border: 1px solid #CCB26E;
+    background-color: var(--tg-theme-bg-color, #fff);
+    border-radius: 10px;
+}
+
+.choices__list::-webkit-scrollbar-track {
+    border-radius: 4px;
+}
+
+.choices__list::-webkit-scrollbar {
+    width: 6px;
+    height: 70px;
+}
+
+.choices__list::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #f0f2f5;
+}
+
+.choices__list:hover::-webkit-scrollbar-thumb {
+    background: #CCB26E;
+}
+
+/* rating */
+.full-stars {
+    text-align: center;
+}
+.full-stars .rating-group {
+    display: flex;
+}
+.full-stars input {
+    position: absolute;
+    left: -9999px;
+}
+.full-stars label {
+    margin: 0;
+    cursor: pointer;
+}
+.full-stars label svg {
+    margin: 2px;
+    height: 30px;
+    width: 30px;
+    fill: #ffa300;
+    transition: fill 0.3s;
+}
+.full-stars input:checked ~ label svg {
+    fill: #666;
+}
+.full-stars .rating-group:hover label svg {
+    fill: #ffa300;
+}
+.full-stars .rating-group input:hover ~ label svg {
+    fill: #666;
+}
+
+/*tourists*/
+#tourists {
+    position: relative;
+    display: inline-block;
+}
+
+#tourists__select {
+    display: none;
+    position: absolute;
+    padding: 15px;
+    top: 66px;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #CCB26E;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--tg-theme-bg-color, #fff);
+    color: var(--tg-theme-text-color, #000);
+    z-index: 1000;
+}
+
+.adult-container {
+    border: 1px solid #CCB26E;
+    border-radius: 5px;
+}
+
+.select-label {
+    margin-right: 10px;
+}
+
+.decrement {
+    margin: 0;
+    padding: 0 10px;
+}
+
+.increment {
+    margin: 0;
+    padding: 0 10px;
+}
+
+.removeChild {
+    border-radius: 5px;
+}
+
+.addChild {
+    border-radius: 5px;
+}
+
+#selectButton {
+    border-radius: 5px;
+}
+
+.select-button {
+    border: 1px solid #CCB26E;
+    background-color: #CCB26E;
+    outline: none;
+}
+
+.select-button:hover {
+    border: 1px solid #e1bf64;
+    background-color: #e1bf64;
+    outline: none;
+}
+
+.select-button:active {
+    border: 1px solid #e1bf64;
+    background-color: #e1bf64;
+    outline: none;
+}
+
+.select-button:focus {
+    border: 1px solid #e1bf64;
+    background-color: #e1bf64;
+    outline: none;
+}
+
+/*daterange*/
+.body .daterangepicker {
+    border: 1px solid #CCB26E;
+    background-color: var(--tg-theme-bg-color, #fff);
+    color: var(--tg-theme-text-color, #000);
+}
+
+.body .daterangepicker .calendar-table {
+    background-color: var(--tg-theme-bg-color, #fff);
+    color: var(--tg-theme-text-color, #000);
+    border: 1px solid var(--tg-theme-bg-color, #fff);
+}
+
+.body .daterangepicker td.disabled, .body .daterangepicker option.disabled {
+    background-color: var(--tg-theme-bg-color, #fff);
+    color: var(--tg-theme-text-color, #000);
+}
+
+.body .daterangepicker td.off, .body .daterangepicker td.off.in-range, .body .daterangepicker td.off.start-date, .body .daterangepicker td.off.end-date {
+    background-color: var(--tg-theme-bg-color, #fff);
+}
+
+.body .daterangepicker td.in-range {
+    background-color: #fdf3e6;
+}
+
+.body .daterangepicker .drp-buttons {
+    border-top: 1px solid #CCB26E;
+}
+
+.body .daterangepicker td.active, .body .daterangepicker td.active:hover {
+    background-color: #CCB26E;
+}
+
+.body .daterangepicker .calendar-table td:hover {
+    color: black;
+}
+
+.body .daterangepicker .calendar-table .next span, .body .daterangepicker .calendar-table .prev span {
+    border-color: var(--tg-theme-text-color, #000);
+}
+
+.body .daterangepicker .calendar-table .next:hover, .body .daterangepicker .calendar-table .prev:hover {
+    background-color: #CCB26E;
+}

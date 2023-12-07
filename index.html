@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebAppYFT</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/styles/choices.min.css">
+    <link rel="stylesheet" href="/web/css/main.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script defer src="/web/js/script.js"></script>
+</head>
+<body class="body">
+<div class="tour d-flex flex-column">
+    <div class="logo"></div>
+    <img src="/web/img/logo.jpg" alt="logo"/>
+    <div class="tour__select d-flex flex-column">
+        <h1>Подбор тура</h1>
+        <label for="city">Город вылета</label>
+        <select id="city" class="js-choice" name="choice"></select>
+        <label for="country">Страна</label>
+        <select name="country" class="js-choice" id="country">
+        </select>
+        <label for="date">Даты вылета</label>
+        <input id="date" class="choices__inner" type="text" name="daterange">
+        <label for="nights">Ночей</label>
+        <input id="nights" class="choices__inner" type="text">
+        <div id="tourists" class="d-flex flex-column">
+            <label for="tourists__input">Туристы</label>
+            <input id="tourists__input" class="choices__inner" type="text" readonly>
+            <div id="tourists__select" class="">
+                <div id="touristContainer" class="tourist-container d-flex mb-2">
+                    <label for="adultsCount" class="select-label">Взрослые:</label>
+                    <div class="adult-container">
+                        <button class="decrement select-button">-</button>
+                        <span id="adultsCount">1</span>
+                        <button class="increment select-button">+</button>
+                    </div>
+                </div>
+                <div id="childrenContainer" class="tourist-container mb-2">
+                    <span class="select-label">Дети:</span>
+                    <button id="addChild" class="addChild select-button">Добавить ребенка</button>
+                </div>
+                <div id="resultContainer"></div>
+                <button id="selectButton" class="select-button">Выбрать</button>
+            </div>
+        </div>
+
+        <label for="class">Класс</label>
+        <div class="full-stars">
+            <div class="rating-group">
+                <input id="class" name="fst" value="0" type="radio" disabled checked />
+                <label for="fst-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                </label>
+                <input name="fst" id="fst-1" value="1" type="radio" />
+                <label for="fst-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                </label>
+                <input name="fst" id="fst-2" value="2" type="radio" />
+                <label for="fst-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                </label>
+                <input name="fst" id="fst-3" value="3" type="radio" />
+                <label for="fst-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                </label>
+                <input name="fst" id="fst-4" value="4" type="radio" />
+                <label for="fst-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                </label>
+                <input name="fst" id="fst-5" value="5" type="radio" />
+            </div>
+        </div>
+        <label for="type">Тип отеля / Тура</label>
+        <select name="type" id="type">
+            <option selected value="">Любой</option>
+            <option value="0">Отель</option>
+            <option value="1">Экскурсионный тур</option>
+            <option value="2">Гостевой дом</option>
+            <option value="6">Апартаменты</option>
+            <option value="7">Вилла</option>
+        </select>
+        <label for="meal">Питание</label>
+        <select name="meal" id="meal">
+            <option selected value="">Любое</option>
+            <option value="3">ВВ - только завтрак</option>
+            <option value="4">НВ - Завтрак, ужин</option>
+            <option value="5">FB - Полный пансион</option>
+            <option value="7">AI - Всё включено</option>
+            <option value="9">UAI - Ультра всё включено</option>
+        </select>
+        <label for="rating">Рейтинг</label>
+        <select name="rating" id="rating">
+            <option selected value="">Любой</option>
+            <option value="2">3.0 - и более</option>
+            <option value="3">3.5 - и более</option>
+            <option value="4">4.0 - и более</option>
+            <option value="5">4.5 - и более</option>
+        </select>
+        <label for="budget">Бюджет (руб)</label>
+        <select name="budget" id="budget">
+            <option selected value="">Любой</option>
+            <option value="2">100 000 - 200 000</option>
+            <option value="3">200 000 - 300 000</option>
+            <option value="4">300 000 - 400 000</option>
+            <option value="5">400 000 - 500 000</option>
+            <option value="6">500 000 и выше</option>
+        </select>
+        <button>Найти туры</button>
+    </div>
+</div>
+</body>
+</html>
