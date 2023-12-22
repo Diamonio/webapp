@@ -365,7 +365,7 @@ function updateCounts() {
 }
 
 $(document).ready(function () {
-    $("#tourists__input").val(adultsCount + " взр")
+    $("#tourists__input").val(adultsCount + " взрослый")
 })
 
 function addChildRow(child) {
@@ -430,13 +430,17 @@ $("#resultContainer").on("click", ".removeChild", function () {
 
 let shouldHideTourists = true
 
-$("#selectButton").on("click", function () {
-    shouldHideTourists = !shouldHideTourists
-    let touristsInfo = adultsCount + " взр"
+function appendTourists() {
+    let touristsInfo = adultsCount + adultsCount === 1 ? " взрослый" : " взрослых"
     if (childrenCount > 0) {
-        touristsInfo += " " + childrenCount + " реб"
+        touristsInfo += " " + childrenCount + childrenCount === 1 ? " ребенок" : " ребенка"
     }
     $("#tourists__input").val(touristsInfo)
+}
+
+$("#selectButton").on("click", function () {
+    shouldHideTourists = !shouldHideTourists
+    appendTourists()
 })
 
 containerTourists.click(function (event) {
@@ -451,11 +455,7 @@ containerTourists.click(function (event) {
 
 $(document).click(function (event) {
     if (!containerTourists.is(event.target)) {
-        let touristsInfo = adultsCount + " взр"
-        if (childrenCount > 0) {
-            touristsInfo += " " + childrenCount + " реб"
-        }
-        $("#tourists__input").val(touristsInfo)
+        appendTourists()
         selectTourists.hide()
     }
 })
