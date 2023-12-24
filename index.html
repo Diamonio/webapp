@@ -23,7 +23,7 @@
     <script defer src="js/script.js"></script>
 </head>
 <body class="body">
-<div class="tour d-flex flex-column">
+<form class="tour d-flex flex-column" action="/submit" method="post">
     <div class="logo"></div>
     <img src="img/logo.jpg" alt="logo"/>
     <div class="tour__select d-flex flex-column">
@@ -34,7 +34,7 @@
         <select name="country" class="js-choice" id="country">
         </select>
         <label for="date">Даты вылета</label>
-        <input id="date" class="choices__inner" type="text" name="daterange">
+        <input id="date" class="choices__inner" type="text" name="daterange" readonly>
         <label for="nights">Ночей</label>
         <input id="nights" class="choices__inner" type="text">
         <div id="tourists" class="d-flex flex-column">
@@ -121,6 +121,6 @@
         </select>
 <!--        <button id="button">Найти туры</button>-->
     </div>
-</div>
+</form>
 </body>
 </html>
