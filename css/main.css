@@ -11,7 +11,7 @@
     padding: 5px;
 }
 
- /*city*/
+/*city*/
 
 .choices {
     max-width: 768px;
@@ -71,7 +71,20 @@
     color: var(--tg-theme-text-color, #000);
     border: 1px solid #CCB26E;
     border-radius: 10px;
+    outline: none;
     z-index: 2;
+}
+
+.choices__inner:hover {
+    border: 1px solid #CCB26E;
+}
+
+.choices__inner:active {
+    border: 1px solid #CCB26E;
+}
+
+.choices__inner:focus {
+    border: 1px solid #CCB26E;
 }
 
 .choices__list--single {
@@ -80,6 +93,18 @@
 
 .is-open .choices__inner {
     border-radius: 10px;
+}
+
+.choices__input {
+    display: inline-block;
+    vertical-align: baseline;
+    background-color: var(--tg-theme-bg-color, #fff);
+    font-size: 14px;
+    margin-bottom: 5px;
+    border: 0;
+    border-radius: 0;
+    max-width: 100%;
+    padding: 4px 0 4px 2px
 }
 
 .choices__placeholder {
@@ -93,6 +118,17 @@
 .choices__list--dropdown .choices__item--selectable {
     padding-right: 15px;
     background-color: var(--tg-theme-bg-color, #fff);
+}
+
+
+.choices__heading:hover .choices__list--dropdown .choices__item--selectable:hover {
+    background-color: var(--tg-theme-bg-color, #fff);
+    color: var(--tg-theme-text-color, #000);
+}
+
+.choices__heading:focus .choices__list--dropdown .choices__item--selectable:hover {
+    background-color: var(--tg-theme-bg-color, #fff);
+    color: var(--tg-theme-text-color, #000);
 }
 
 .choices__list--dropdown .choices__item--selectable:hover {
@@ -110,7 +146,27 @@
 .choices__list--dropdown {
     top: calc(100% - 30px);
     padding-top: 30px;
+    padding-bottom: 0;
     background-color: var(--tg-theme-bg-color, #fff);
+    border: 1px solid #CCB26E;
+}
+
+.is-flipped .choices__list--dropdown {
+    top: auto;
+    bottom: calc(100% - 30px);
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 30px;
+    margin-bottom: -1px;
+    border-radius: .25rem .25rem 0 0
+}
+
+.choices__heading {
+    font-weight: 600;
+    font-size: 12px;
+    padding: 10px;
+    border-bottom: 1px solid #CCB26E;
+    color: gray
 }
 
 .choices__list--dropdown.is-active {
@@ -291,3 +347,11 @@
 .body .daterangepicker .calendar-table .next:hover, .body .daterangepicker .calendar-table .prev:hover {
     background-color: #CCB26E;
 }
+
+.body .btn-warning {
+    color: #fff;
+    margin-top: 3px;
+    background-color: #CCB26E;
+    border-color: #CCB26E;
+}
+
