@@ -292,13 +292,25 @@ const budget = new Choices(selectBudget, {
     searchEnabled: false,
     itemSelectText: '',
 })
+let max_budget = 0
+let min_budget = 0
+const budgetRanges = {
+    "2": [100000, 200000],
+    "3": [200000, 300000],
+    "4": [300000, 400000],
+    "5": [400000, 500000],
+    "6": [500000, 1000000],
+}
+
+selectBudget.addEventListener('change', function () {
+    [min_budget, max_budget] = budgetRanges[selectBudget.value] || [0, 0]
+})
 
 const daterange = $('input[name="daterange"]')
 let currentDate = new Date()
 let endFromDateValue = currentDate.toLocaleDateString('en-GB')
-currentDate.setMonth(currentDate.getMonth() + 1);
+currentDate.setMonth(currentDate.getMonth() + 1)
 let endToDateValue = currentDate.toLocaleDateString('en-GB')
-
 
 $(function () {
     daterange.daterangepicker({
@@ -308,10 +320,12 @@ $(function () {
         startDate: endFromDateValue,
         endDate: endToDateValue,
         minDate: endFromDateValue,
+        applyButtonClasses: "btn-warning",
+        cancelClass: "btn-secondary",
         locale: {
             format: "DD/MM/YYYY",
             applyLabel: "Ок",
-            cancelLabel: "Очистить поле",
+            cancelLabel: "Очистить даты",
             fromLabel: "От",
             toLabel: "До",
             daysOfWeek: [
@@ -339,26 +353,29 @@ $(function () {
             ]
         },
     }, function (start, end) {
-        start.format('YYYY-MM-DD')
-        end.format('YYYY-MM-DD')
+        endFromDateValue = start.format('YYYY-MM-DD')
+        endToDateValue = end.format('YYYY-MM-DD')
     })
     daterange.on('apply.daterangepicker', function (ev, picker) {
         $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'))
+
     })
 
     daterange.on('cancel.daterangepicker', function () {
         endFromDateValue = currentDate.toLocaleDateString('en-GB')
-        currentDate.setMonth(currentDate.getMonth() + 1);
+        currentDate.setMonth(currentDate.getMonth() + 1)
         endToDateValue = currentDate.toLocaleDateString('en-GB')
         $(this).val(endFromDateValue + ' - ' + endToDateValue)
     })
 })
 
-
 const containerTourists = $('#tourists')
 const selectTourists = $('#tourists__select')
 let adultsCount = 1
 let childrenCount = 0
+let child_age_1
+let child_age_2
+let child_age_3
 
 function updateCounts() {
     $("#adultsCount").text(adultsCount)
@@ -368,12 +385,19 @@ $(document).ready(function () {
     $("#tourists__input").val(adultsCount + " взрослый")
 })
 
-function addChildRow(child) {
+let validValue
+let findNumbers = []
+
+function addChildRow() {
+    childrenCount++
+    findNumber()
+    let resultArray = compareArrays(findNumbers)
+    validValue = resultArray[0]
     const childRow = $("<div class='tourist-container child-container d-flex mb-2'>" +
-        "<div id='childAgeContainer' class='child-container'>" +
-        "<label for='childAge-" + child + "' class='select-label'>Возраст ребенка: </label>" +
-        "<select id='childAge-" + child +"' class='select-label'>" +
-        "<option value=\"2\">До 2 лет</option>" +
+        "<div class='child-container'>" +
+        "<label for='childAge-" + validValue + "' class='select-label'>Возраст ребенка: </label>" +
+        "<select id='childAge-" + validValue +"' data-select='" + validValue +"' class='select-label data-select'>" +
+        "<option value=\"2\" selected>До 2 лет</option>" +
         "<option value=\"3\">3 года</option>" +
         "<option value=\"4\">4 года</option>" +
         "<option value=\"5\">5 лет</option>" +
@@ -389,9 +413,53 @@ function addChildRow(child) {
         "<option value=\"15\">15 лет</option>" +
         "</select>" +
         "</div>" +
-        "<button class='removeChild select-button' data-child='" + child + "'>Удалить</button>" +
+        "<button class='removeChild select-button' data-child='" + validValue + "'>Удалить</button>" +
         "</div>")
     $("#resultContainer").append(childRow)
+    childRow.find("select").change(function () {
+        const selectedValue = $(this).val()
+        updateChildAge(validValue, selectedValue)
+    })
+    updateChildAge(validValue, $('[data-select="' + validValue + '"]').val())
+    findNumber()
+    console.log('массив с селектами: '+ findNumbers)
+}
+
+function findNumber() {
+    findNumbers = []
+    $('.data-select').each(function () {
+        let validValue = +$(this).attr('data-select')
+        findNumbers.push(validValue)
+    })
+}
+
+function updateChildAge(child, value) {
+    switch (child) {
+        case 1:
+            child_age_1 = value
+            break
+        case 2:
+            child_age_2 = value
+            break
+        case 3:
+            child_age_3 = value
+            break
+    }
+}
+
+function compareArrays(findNumbers) {
+    const existingNumbers = [1, 2, 3]
+    let newArray = []
+
+    for (let i = 0; i < existingNumbers.length; i++) {
+        let number = existingNumbers[i]
+        if (findNumbers.indexOf(number) === -1) {
+            newArray.push(number)
+        }
+    }
+    newArray.sort((a, b) => a - b)
+
+    return newArray
 }
 
 $(".increment").on("click", function () {
@@ -403,13 +471,12 @@ $(".increment").on("click", function () {
 
 $('#addChild').on('click', function () {
     if (childrenCount < 4) {
-        childrenCount++
         $("#childAgeContainer").show()
+        addChildRow()
     }
     if (childrenCount === 3) {
         $('#addChild').hide()
     }
-    addChildRow(childrenCount)
 })
 
 $(".decrement").on("click", function () {
@@ -421,21 +488,32 @@ $(".decrement").on("click", function () {
 
 $("#resultContainer").on("click", ".removeChild", function () {
     const child = $(this).data("child")
+    updateChildAge(child, null)
     $(this).parent().remove()
     childrenCount--
     if (childrenCount < 4) {
         $('#addChild').show()
+    }
+    if (childrenCount === 0) {
+        validValue = 0
     }
 })
 
 let shouldHideTourists = true
 
 function appendTourists() {
-    let touristsInfo = adultsCount + adultsCount === 1 ? " взрослый" : " взрослых"
+    let touristsInfo = adultsCount + (adultsCount === 1 ? " взрослый" : " взрослых")
     if (childrenCount > 0) {
-        touristsInfo += " " + childrenCount + childrenCount === 1 ? " ребенок" : " ребенка"
+        touristsInfo += " " + childrenCount + (childrenCount === 1 ? " ребенок" : " ребенка")
     }
     $("#tourists__input").val(touristsInfo)
+    if ($('.data-select').length > 0) {
+        $('.data-select').each(function () {
+            let validValue = +$(this).attr('data-select')
+            let selectedValue = $(this).val()
+            updateChildAge(validValue, selectedValue)
+        })
+    }
 }
 
 $("#selectButton").on("click", function () {
@@ -458,4 +536,60 @@ $(document).click(function (event) {
         appendTourists()
         selectTourists.hide()
     }
+})
+
+// $('#button').on('click', function () {
+//     let fields = {
+//         city: selectCity.value,
+//         country: selectCountry.value,
+//         type: selectType.value,
+//         meal: selectMeal.value,
+//         rating: selectRating.value,
+//         price_from: min_budget,
+//         price_to: max_budget,
+//         date_from: endFromDateValue,
+//         date_to: endToDateValue,
+//         stars: document.querySelector('input[type="radio"]:checked').value,
+//         adults: adultsCount,
+//     }
+//     if (child_age_1) {
+//         fields.child_age_1 = child_age_1
+//     }
+//     if (child_age_2) {
+//         fields.child_age_2 = child_age_2
+//     }
+//     if (child_age_3) {
+//         fields.child_age_3 = child_age_3
+//     }
+//     const data = JSON.stringify(fields)
+//     console.log(data)
+// })
+
+Telegram.WebApp.ready()
+Telegram.WebApp.MainButton.setText('Подобрать тур').show().onClick(function () {
+    let fields = {
+        city: selectCity.value,
+        country: selectCountry.value,
+        type: selectType.value,
+        meal: selectMeal.value,
+        rating: selectRating.value,
+        price_from: min_budget,
+        price_to: max_budget,
+        date_from: endFromDateValue,
+        date_to: endToDateValue,
+        stars: document.querySelector('input[type="radio"]:checked').value,
+        adults: adultsCount,
+    }
+    if (child_age_1) {
+        fields.child_age_1 = child_age_1
+    }
+    if (child_age_2) {
+        fields.child_age_2 = child_age_2
+    }
+    if (child_age_3) {
+        fields.child_age_3 = child_age_3
+    }
+    const data = JSON.stringify(fields)
+    Telegram.WebApp.sendData(data)
+    Telegram.WebApp.close()
 })
