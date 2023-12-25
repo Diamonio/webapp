@@ -560,7 +560,7 @@ $(document).click(function (event) {
 Telegram.WebApp.ready()
 //     Telegram.WebApp.expand()
 
-Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
+Telegram.WebApp.MainButton.setText('Choose C675765olor').show().onClick(function () {
     const data = JSON.stringify({hex: '123', rgb: '123'});
     Telegram.WebApp.sendData(data);
     Telegram.WebApp.close();
