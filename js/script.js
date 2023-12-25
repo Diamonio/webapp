@@ -1,11 +1,3 @@
-let tg = window.Telegram.WebApp
-tg.expand()
-
-Telegram.WebApp.onEvent('mainButtonClicked', function(){
-    tg.sendData("some string that we need to send");
-    //при клике на основную кнопку отправляем данные в строковом виде
-});
-
 const selectCity = document.querySelector('#city');
 const city = new Choices(selectCity, {
     searchEnabled: false,
@@ -566,6 +558,7 @@ $(document).click(function (event) {
 // })
 
 Telegram.WebApp.ready()
+//     Telegram.WebApp.expand()
 
 Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
     const data = JSON.stringify({hex: '123', rgb: '123'});
@@ -598,5 +591,4 @@ Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
 //     const data = JSON.stringify(fields)
 //     Telegram.WebApp.sendData(data)
 //     Telegram.WebApp.close()
-//     Telegram.WebApp.expand()
 // })
