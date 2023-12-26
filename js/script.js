@@ -454,14 +454,16 @@ function compareArrays(findNumbers) {
     return newArray
 }
 
-$(".increment").on("click", function () {
+$(".increment").on("click", function (event) {
+    event.preventDefault()
     if (adultsCount < 6) {
         adultsCount++
     }
     updateCounts()
 })
 
-$('#addChild').on('click', function () {
+$('#addChild').on('click', function (event) {
+    event.preventDefault()
     if (childrenCount < 4) {
         $("#childAgeContainer").show()
         addChildRow()
@@ -471,7 +473,8 @@ $('#addChild').on('click', function () {
     }
 })
 
-$(".decrement").on("click", function () {
+$(".decrement").on("click", function (event) {
+    event.preventDefault()
     if (adultsCount > 1) {
         adultsCount--
     }
@@ -508,12 +511,14 @@ function appendTourists() {
     }
 }
 
-$("#selectButton").on("click", function () {
+$("#selectButton").on("click", function (event) {
+    event.preventDefault()
     shouldHideTourists = !shouldHideTourists
     appendTourists()
 })
 
 containerTourists.click(function (event) {
+    event.preventDefault()
     event.stopPropagation()
     if (shouldHideTourists) {
         selectTourists.show()
@@ -524,38 +529,39 @@ containerTourists.click(function (event) {
 })
 
 $(document).click(function (event) {
+    event.preventDefault()
     if (!containerTourists.is(event.target)) {
         appendTourists()
         selectTourists.hide()
     }
 })
-
-$('#button').on('click', function () {
-    let fields = {
-        city: selectCity.value,
-        country: selectCountry.value,
-        type: selectType.value,
-        meal: selectMeal.value,
-        rating: selectRating.value,
-        price_from: min_budget,
-        price_to: max_budget,
-        date_from: endFromDateValue,
-        date_to: endToDateValue,
-        stars: document.querySelector('input[type="radio"]:checked').value,
-        adults: adultsCount,
-    }
-    if (child_age_1) {
-        fields.child_age_1 = child_age_1
-    }
-    if (child_age_2) {
-        fields.child_age_2 = child_age_2
-    }
-    if (child_age_3) {
-        fields.child_age_3 = child_age_3
-    }
-    const data = JSON.stringify(fields)
-    console.log(data)
-})
+//
+// $('#button').on('click', function () {
+//     let fields = {
+//         city: selectCity.value,
+//         country: selectCountry.value,
+//         type: selectType.value,
+//         meal: selectMeal.value,
+//         rating: selectRating.value,
+//         price_from: min_budget,
+//         price_to: max_budget,
+//         date_from: endFromDateValue,
+//         date_to: endToDateValue,
+//         stars: document.querySelector('input[type="radio"]:checked').value,
+//         adults: adultsCount,
+//     }
+//     if (child_age_1) {
+//         fields.child_age_1 = child_age_1
+//     }
+//     if (child_age_2) {
+//         fields.child_age_2 = child_age_2
+//     }
+//     if (child_age_3) {
+//         fields.child_age_3 = child_age_3
+//     }
+//     const data = JSON.stringify(fields)
+//     console.log(data)
+// })
 
 Telegram.WebApp.ready()
 Telegram.WebApp.expand()
