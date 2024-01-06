@@ -315,7 +315,7 @@ $(function () {
         applyButtonClasses: "btn-warning",
         cancelClass: "btn-secondary",
         locale: {
-            format: "DD.MM.YYYY",
+            format: "DD/MM/YYYY",
             applyLabel: "Ок",
             cancelLabel: "Очистить даты",
             fromLabel: "От",
@@ -345,8 +345,8 @@ $(function () {
             ]
         },
     }, function (start, end) {
-        endFromDateValue = start.format('YYYY-MM-DD')
-        endToDateValue = end.format('YYYY-MM-DD')
+        endFromDateValue = start.format('DD/MM/YYYY')
+        endToDateValue = end.format('DD/MM/YYYY')
     })
     daterange.on('apply.daterangepicker', function (ev, picker) {
         $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'))
