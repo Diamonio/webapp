@@ -315,7 +315,7 @@ $(function () {
         applyButtonClasses: "btn-warning",
         cancelClass: "btn-secondary",
         locale: {
-            format: "DD/MM/YYYY",
+            format: "DD.MM.YYYY",
             applyLabel: "Ок",
             cancelLabel: "Очистить даты",
             fromLabel: "От",
