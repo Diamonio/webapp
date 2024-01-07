@@ -567,26 +567,26 @@ Telegram.WebApp.expand()
 
 Telegram.WebApp.MainButton.setText('Подобрать тур').show().onClick(function () {
     let fields = {
-        city: selectCity.value,
-        country: selectCountry.value,
-        type: selectType.value,
-        meal: selectMeal.value,
-        rating: selectRating.value,
+        city: +selectCity.value,
+        country: +selectCountry.value,
+        type: +selectType.value,
+        meal: +selectMeal.value,
+        rating: +selectRating.value,
         price_from: min_budget,
         price_to: max_budget,
         date_from: endFromDateValue,
         date_to: endToDateValue,
-        stars: document.querySelector('input[type="radio"]:checked').value,
-        adults: adultsCount,
+        stars: +document.querySelector('input[type="radio"]:checked').value,
+        adults: +adultsCount,
     }
     if (child_age_1) {
-        fields.child_age_1 = child_age_1
+        fields.child_age_1 = +child_age_1
     }
     if (child_age_2) {
-        fields.child_age_2 = child_age_2
+        fields.child_age_2 = +child_age_2
     }
     if (child_age_3) {
-        fields.child_age_3 = child_age_3
+        fields.child_age_3 = +child_age_3
     }
     const data = JSON.stringify(fields)
     Telegram.WebApp.sendData(data)
