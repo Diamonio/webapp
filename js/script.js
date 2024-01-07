@@ -414,7 +414,6 @@ function addChildRow() {
     })
     updateChildAge(validValue, $('[data-select="' + validValue + '"]').val())
     findNumber()
-    console.log('массив с селектами: '+ findNumbers)
 }
 
 function findNumber() {
@@ -529,13 +528,13 @@ containerTourists.click(function (event) {
 })
 
 $(document).click(function (event) {
-    event.preventDefault()
+    // event.preventDefault()
     if (!containerTourists.is(event.target)) {
         appendTourists()
         selectTourists.hide()
     }
 })
-//
+
 // $('#button').on('click', function () {
 //     let fields = {
 //         city: selectCity.value,
