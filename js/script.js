@@ -273,6 +273,12 @@ const meal = new Choices(selectMeal, {
     itemSelectText: '',
 })
 
+const selectNights = document.querySelector('#nights');
+const nights = new Choices(selectNights, {
+    searchEnabled: false,
+    itemSelectText: '',
+})
+
 const selectRating = document.querySelector('#rating');
 const rating = new Choices(selectRating, {
     searchEnabled: false,
@@ -541,6 +547,7 @@ $(document).click(function (event) {
 //         country: selectCountry.value,
 //         type: selectType.value,
 //         meal: selectMeal.value,
+//         nights: selectNights.value,
 //         rating: selectRating.value,
 //         price_from: min_budget,
 //         price_to: max_budget,
@@ -571,6 +578,7 @@ Telegram.WebApp.MainButton.setText('Подобрать тур').show().onClick(f
         country: +selectCountry.value,
         type: +selectType.value,
         meal: +selectMeal.value,
+        nights: +selectNights.value,
         rating: +selectRating.value,
         price_from: min_budget,
         price_to: max_budget,
