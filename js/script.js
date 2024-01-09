@@ -556,6 +556,10 @@ $(document).click(function (event) {
 //         stars: document.querySelector('input[type="radio"]:checked').value,
 //         adults: adultsCount,
 //     }
+//     if (+selectNights.value >= 1 && +selectNights.value <= 14) {
+//         fields.nights_from = +selectNights.value
+//         fields.nights_to = +selectNights.value + 14
+//     }
 //     if (child_age_1) {
 //         fields.child_age_1 = child_age_1
 //     }
@@ -588,8 +592,8 @@ Telegram.WebApp.MainButton.setText('Подобрать тур').show().onClick(f
     }
 
     if (+selectNights.value >= 1 && +selectNights.value <= 14) {
-        fields.nights_from = selectNights.value
-        fields.nights_to = selectNights.value + 14
+        fields.nights_from = +selectNights.value
+        fields.nights_to = +selectNights.value + 14
     }
     if (child_age_1) {
         fields.child_age_1 = +child_age_1
