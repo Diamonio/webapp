@@ -547,7 +547,7 @@ $(document).click(function (event) {
 //         country: selectCountry.value,
 //         type: selectType.value,
 //         meal: selectMeal.value,
-//         nights: selectNights.value,
+//         nights: +selectNights.value,
 //         rating: selectRating.value,
 //         price_from: min_budget,
 //         price_to: max_budget,
