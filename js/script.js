@@ -578,7 +578,6 @@ Telegram.WebApp.MainButton.setText('Подобрать тур').show().onClick(f
         country: +selectCountry.value,
         type: +selectType.value,
         meal: +selectMeal.value,
-        nights: +selectNights.value,
         rating: +selectRating.value,
         price_from: min_budget,
         price_to: max_budget,
@@ -586,6 +585,11 @@ Telegram.WebApp.MainButton.setText('Подобрать тур').show().onClick(f
         date_to: endToDateValue,
         stars: +document.querySelector('input[type="radio"]:checked').value,
         adults: +adultsCount,
+    }
+
+    if (+selectNights.value >= 1 && +selectNights.value <= 14) {
+        fields.nights_from = selectNights.value
+        fields.nights_to = selectNights.value + 14
     }
     if (child_age_1) {
         fields.child_age_1 = +child_age_1
