@@ -576,7 +576,7 @@ $(document).click(function (event) {
 Telegram.WebApp.ready()
 Telegram.WebApp.expand()
 
-Telegram.WebApp.MainButton.setText('Подобрать тур').show().onClick(function () {
+Telegram.WebApp.MainButton.setText('Поиск туров').show().onClick(function () {
     let fields = {
         city: +selectCity.value,
         country: +selectCountry.value,
