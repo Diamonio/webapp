@@ -608,5 +608,3 @@ Telegram.WebApp.MainButton.setText('Поиск туров').show().onClick(funct
     Telegram.WebApp.MainButton.hide()
     // Telegram.WebApp.close()
 })
-
-Telegram.WebApp.MainButton.hide()
