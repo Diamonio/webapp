@@ -604,7 +604,7 @@ Telegram.WebApp.MainButton.setText('Поиск туров').show().onClick(funct
         fields.child_age_3 = +child_age_3
     }
     const data = JSON.stringify(fields)
-    Telegram.WebApp.sendData(data)
+    // Telegram.WebApp.sendData(data)
     Telegram.WebApp.MainButton.hide()
     // Telegram.WebApp.close()
 })
