@@ -590,7 +590,6 @@ Telegram.WebApp.MainButton.setText('Подобрать тур').show().onClick(f
         stars: +document.querySelector('input[type="radio"]:checked').value,
         adults: +adultsCount,
     }
-
     if (+selectNights.value >= 1 && +selectNights.value <= 14) {
         fields.nights_from = +selectNights.value
         fields.nights_to = +selectNights.value + 14
@@ -606,5 +605,6 @@ Telegram.WebApp.MainButton.setText('Подобрать тур').show().onClick(f
     }
     const data = JSON.stringify(fields)
     Telegram.WebApp.sendData(data)
-    Telegram.WebApp.close()
+    Telegram.WebApp.MainButton.hide()
+    // Telegram.WebApp.close()
 })
