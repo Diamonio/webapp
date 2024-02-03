@@ -273,11 +273,37 @@ const meal = new Choices(selectMeal, {
     itemSelectText: '',
 })
 
-const selectNights = document.querySelector('#nights');
-const nights = new Choices(selectNights, {
-    searchEnabled: false,
-    itemSelectText: '',
+// const selectNights = document.querySelector('#nights');
+// const nights = new Choices(selectNights, {
+//     searchEnabled: false,
+//     itemSelectText: '',
+//     maxItemCount: 4
+// })
+
+let fields = {
+    nights_from: 1,
+    nights_to: 15
+};
+
+$('#nights').on('input', function() {
+    let inputValue = $(this).val()
+    let regex = /^\d+(-\d+)?$/
+
+    if (inputValue.match(regex)) {
+        let values = inputValue.split('-').map(Number)
+        if (values.length === 2) {
+            fields.nights_from = Math.max(1, Math.min(values[0], 28))
+            fields.nights_to = Math.max(fields.nights_from, Math.min(values[1], 28))
+        } else if (values.length === 1) {
+            fields.nights_from = Math.max(1, Math.min(values[0], 28))
+            fields.nights_to = fields.nights_from
+        }
+    } else {
+        fields.nights_from = 1
+        fields.nights_to = 15
+    }
 })
+
 
 const selectRating = document.querySelector('#rating');
 const rating = new Choices(selectRating, {
@@ -577,7 +603,7 @@ Telegram.WebApp.ready()
 Telegram.WebApp.expand()
 
 Telegram.WebApp.MainButton.setText('Поиск туров').show().onClick(function () {
-    let fields = {
+    fields = {
         city: +selectCity.value,
         country: +selectCountry.value,
         type: +selectType.value,
@@ -590,10 +616,10 @@ Telegram.WebApp.MainButton.setText('Поиск туров').show().onClick(funct
         stars: +document.querySelector('input[type="radio"]:checked').value,
         adults: +adultsCount,
     }
-    if (+selectNights.value >= 1 && +selectNights.value <= 14) {
-        fields.nights_from = +selectNights.value
-        fields.nights_to = +selectNights.value + 14
-    }
+    // if (+selectNights.value >= 1 && +selectNights.value <= 14) {
+    //     fields.nights_from = +selectNights.value
+    //     fields.nights_to = +selectNights.value + 14
+    // }
     if (child_age_1) {
         fields.child_age_1 = +child_age_1
     }
